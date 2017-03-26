@@ -11,7 +11,7 @@ process.stdin.on('data', function (data) {
 
 process.stdin.on('end', function () {
     input_stdin_array = input_stdin.split("\n");
-    main();    
+    main();
 });
 
 function readLine() {
@@ -23,10 +23,10 @@ function readLine() {
 function main() {
     var len = parseInt(readLine());
     var s = readLine();
-    
+
     let maxLen = 0;
     let charMap = '';
-    
+
     function isAlternate(str) {
         if (str.length < 2) {
             return false;
@@ -42,14 +42,14 @@ function main() {
         }
         return true;
     }
-    
+
     // create character map of s
     for (c of s) {
         if (charMap.indexOf(c) === -1) {
             charMap += c;
         }
     }
-    
+
     // create all possible character pairs
     for (let j = 0; j < charMap.length - 1; j++) {
         for (let i = j+1; i < charMap.length; i++) {
