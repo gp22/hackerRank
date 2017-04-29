@@ -51,14 +51,14 @@ function main() {
     }
 
     /*
-    Test if all of the words in ransom exist in magazine in the correct
-    amounts.
+    Test if all of the words in hash table1 exist in hash table2 in the correct
+    amounts. Return true if they do, else return false.
     */
-    function replica(arr) {
+    function replica(arr, table1, table2) {
         for (word of arr) {
             hashedWord = hash(word);
-            if (magazineTable[hashedWord] === undefined || 
-                magazineTable[hashedWord].length < ransomTable[hashedWord].length) {
+            if (table2[hashedWord] === undefined || 
+                table2[hashedWord].length < table1[hashedWord].length) {
                 return false;
             }
         }
@@ -68,5 +68,6 @@ function main() {
     const magazineTable = buildHashTable(magazine);
     const ransomTable = buildHashTable(ransom);
     
-    replica(ransom) ? console.log('Yes') : console.log('No');
+    replica(ransom, ransomTable, magazineTable) ?
+        console.log('Yes') : console.log('No');
 }
