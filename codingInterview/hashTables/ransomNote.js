@@ -26,10 +26,8 @@ function main() {
     var n = parseInt(m_temp[1]);
     magazine = readLine().split(' ');
     ransom = readLine().split(' ');
-    
-    let hashTable = [];
 
-    // Define the hash function
+    // Define the string hash function.
     function hash(string) {
         let hash = 0;
         for (c of string) {
@@ -38,20 +36,37 @@ function main() {
         return hash - 65;
     };
 
-    // Hash every word in magazine and add it to hashTable
-    for (word of magazine) {
-        hashTable[hash(word)] = word;
+    // Build hash table out of array of strings arr.
+    function buildHashTable(arr) {
+        let hashTable = [];
+        for (word of arr) {
+            hashedWord = hash(word);
+            if (hashTable[hashedWord] === undefined) {
+                hashTable[hashedWord] = [word];
+            } else {
+                hashTable[hashedWord].push(word);
+            }
+        }
+        return hashTable;
     }
-    
-    // Define a function to test if every word is in hashTable
+
+    /*
+    Test if all of the words in ransom exist in magazine in the correct
+    amounts.
+    */
     function replica(arr) {
         for (word of arr) {
-            if (hashTable[hash(word)] != word) {
+            hashedWord = hash(word);
+            if (magazineTable[hashedWord] === undefined || 
+                magazineTable[hashedWord].length < ransomTable[hashedWord].length) {
                 return false;
             }
         }
         return true;
     }
+
+    const magazineTable = buildHashTable(magazine);
+    const ransomTable = buildHashTable(ransom);
     
     replica(ransom) ? console.log('Yes') : console.log('No');
 }
