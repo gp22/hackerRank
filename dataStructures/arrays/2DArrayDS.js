@@ -11,7 +11,7 @@ process.stdin.on('data', function (data) {
 
 process.stdin.on('end', function () {
     input_stdin_array = input_stdin.split("\n");
-    main();    
+    main();
 });
 
 function readLine() {
@@ -22,19 +22,34 @@ function readLine() {
 
 function main() {
     var arr = [];
+    let largestSum;
     for(arr_i = 0; arr_i < 6; arr_i++){
        arr[arr_i] = readLine().split(' ');
        arr[arr_i] = arr[arr_i].map(Number);
     }
-    
-    calculateHourglass = function(array, i) {
-        hourglassSum = 
-        arr[i][i] + arr[i][i + 1] + arr[i][i + 2] +
-        arr[i + 1][i + 1] +
-        arr[i + 2][i] + arr[i + 2][i + 1] + arr[i + 2][i + 2];
-        
+
+    calculateHourglassSum = function(x, y) {
+        hourglassSum =
+        arr[y][x] + arr[y][x + 1] + arr[y][x + 2] +
+        arr[y + 1][x + 1] +
+        arr[y + 2][x] + arr[y + 2][x + 1] + arr[y + 2][x + 2];
+
         return hourglassSum;
     }
-    
-    console.log(calculateHourglass(arr, 0));
+
+    for (let i = 0; i < arr[0].length - 2; i++) {
+        for (let j = 0; j < arr.length - 2; j++) {
+            let sum = calculateHourglassSum(j, i);
+
+            if (!largestSum) {
+                largestSum = sum;
+            } else {
+                if (sum > largestSum) {
+                    largestSum = sum;
+                }
+            }
+        }
+    }
+
+    console.log(largestSum);
 }
