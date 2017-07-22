@@ -41,7 +41,7 @@ function main() {
         for (let j = 0; j < arr.length - 2; j++) {
             let sum = calculateHourglassSum(j, i);
 
-            if (!largestSum) {
+            if (typeof largestSum === 'undefined') {
                 largestSum = sum;
             } else {
                 if (sum > largestSum) {
