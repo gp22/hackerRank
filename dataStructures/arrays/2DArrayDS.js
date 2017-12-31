@@ -22,34 +22,34 @@ function readLine() {
 
 function main() {
     var arr = [];
-    let largestSum;
     for(arr_i = 0; arr_i < 6; arr_i++){
        arr[arr_i] = readLine().split(' ');
        arr[arr_i] = arr[arr_i].map(Number);
     }
-
-    calculateHourglassSum = function(x, y) {
-        hourglassSum =
-        arr[y][x] + arr[y][x + 1] + arr[y][x + 2] +
-        arr[y + 1][x + 1] +
-        arr[y + 2][x] + arr[y + 2][x + 1] + arr[y + 2][x + 2];
-
+    calculateHourglassSum = (a, x, y) => {
+        hourglassSum = a[y][x] + a[y][x + 1] + a[y][x + 2] +
+                       a[y + 1][x + 1] +
+                       a[y + 2][x] + a[y + 2][x + 1] + a[y + 2][x + 2];
         return hourglassSum;
     }
 
-    for (let i = 0; i < arr[0].length - 2; i++) {
-        for (let j = 0; j < arr.length - 2; j++) {
-            let sum = calculateHourglassSum(j, i);
+    calculateLargestSum = (a) => {
+        let largestSum;
 
-            if (typeof largestSum === 'undefined') {
-                largestSum = sum;
-            } else {
+        for (let i = 0; i < a[0].length - 2; i++) {
+            for (let j = 0; j < a.length - 2; j++) {
+                let sum = calculateHourglassSum(a, j, i);
+
+                if (typeof largestSum === 'undefined') {
+                    largestSum = sum;
+                }
                 if (sum > largestSum) {
                     largestSum = sum;
                 }
             }
         }
+        return largestSum;
     }
 
-    console.log(largestSum);
+    console.log(calculateLargestSum(arr));
 }

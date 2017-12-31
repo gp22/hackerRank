@@ -11,7 +11,7 @@ process.stdin.on('data', function (data) {
 
 process.stdin.on('end', function () {
     input_stdin_array = input_stdin.split("\n");
-    main();    
+    main();
 });
 
 function readLine() {
@@ -31,7 +31,14 @@ function main() {
     // }
 
     // console.log(reverseArrString.split('').join(' '));
-    
-   reverseArr = arr.reverse();
-   console.log(reverseArr.join(' '));
+
+    //  console.log(arr.reverse().join(' '));
+    const reverse = function(a) {
+      const reversed = [];
+      for (let i = a.length-1; i >= 0; i--) {
+          reversed.push(a[i]);
+      }
+      return reversed;
+    }
+    console.log(reverse(arr).join(' '));
 }
